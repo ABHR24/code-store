@@ -2,9 +2,12 @@ package com.self.master.codestore.algorithm;
 
 import lombok.extern.slf4j.Slf4j;
 
+import static com.self.master.codestore.CodeStoreUtility.display;
+
 /**
  * @author ABHR24
  * selection sorting algorithm.
+ * <p>
  * Need 3 indices i,j,and min
  * Step 1: Compare the min index with the j index value
  * Step 2: Find the lowest min number in the array after the current pointer and replace the min index
@@ -15,19 +18,14 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class SelectionSort {
 
-    int[] arr;
-    int n;
-
-    public SelectionSort(int[] arr) {
-        this.arr = arr;
-        n = arr.length - 1;
-    }
-
-    /*
-       key is to compare with the minimum index with j index
-       and then swap the min index with i index
+    /**
+     * key is to compare with the minimum index with j index  and then swap the min index with i index
+     *
+     * @param arr the unsorted array
+     * @return the sorted array
      */
-    public void sort() {
+    public int[] sort(int[] arr) {
+        int n = arr.length - 1;
         for (int i = 0; i < n; i++) {
             int min = i;
             for (int j = i + 1; j <= n; j++) {
@@ -39,24 +37,12 @@ public class SelectionSort {
             arr[i] = arr[min];
             arr[min] = temp;
         }
+        return arr;
     }
-
-    public void display() {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i <= n; i++) {
-            sb.append(arr[i]);
-            if (i != n) {
-                sb.append(" ");
-            }
-        }
-        log.info("sorted array: {}", sb.toString());
-    }
-
 
     public static void main(String[] args) {
         int[] arr = new int[]{4, 1, 2, 3, 6, 7, 8, 5};
-        SelectionSort selectionSort = new SelectionSort(arr);
-        selectionSort.sort();
-        selectionSort.display();
+        SelectionSort selectionSort = new SelectionSort();
+        log.info("sorted array: {}", display(selectionSort.sort(arr)));
     }
 }
